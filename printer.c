@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <stdarg.h>
 #include <unistd.h>
 #include "main.h"
@@ -40,11 +38,11 @@ char *_strncpy(char *dest, char *src)
 }
 
 /**
- * _strrev - function that reverses a string
+ * _reverse_string - function that reverses a string
  * @str: the string to reverse
  * Return: the reversed string
  */
-char *_strrev(char *str)
+char *_reverse_string(char *str)
 {
 	int i;
 	int len = 0;
@@ -69,13 +67,13 @@ char *_strrev(char *str)
 }
 
 /**
- * _itoa - function converts numbers to strings
+ * _number_to_str - function converts numbers to strings
  * @i: the data
  * @strout: the destination
  * @base: the number base
  * Return: the pointer to the output string
  */
-char *_itoa(int i, char *strout, int base)
+char *_number_to_str(int i, char *strout, int base)
 {
 	char *str = strout;
 	int digit, sign = 0;
@@ -101,7 +99,7 @@ char *_itoa(int i, char *strout, int base)
 
 	*str = '\0';
 
-	_strrev(strout);
+	_reverse_string(strout);
 
 	return (strout);
 }
@@ -119,9 +117,7 @@ int _printf(const char *format, ...)
 	char final[4];
 	char buff[1000] = {0}, tmp[20];
 	char *str_arg;
-
 	va_start(vl, format);
-
 	while (format && format[i])
 	{
 		if (format[i] == '%')
@@ -134,7 +130,7 @@ int _printf(const char *format, ...)
 					j++;
 					break;
 				case 'd':
-					_itoa(va_arg(vl, int), tmp, 10);
+					_number_to_str(va_arg(vl, int), tmp, 10);
 					_strncpy(&buff[j], tmp);
 					j += _strlen(tmp);
 					break;
@@ -142,7 +138,7 @@ int _printf(const char *format, ...)
 					temp_unsigned_int = va_arg(vl, int);
 					if (temp_unsigned_int < 0)
 						temp_unsigned_int *= -1;
-					_itoa(temp_unsigned_int, tmp, 10);
+					_number_to_str(temp_unsigned_int, tmp, 10);
 					_strncpy(&buff[j], tmp);
 					j += _strlen(tmp);
 					break;
@@ -171,13 +167,10 @@ int _printf(const char *format, ...)
 		}
 		i++;
 	}
-
 	int k = 0;
-
 	while (buff[k])
 	{
 		write(1, &buff[k], 1);
-
 		k++;
 	}
 	va_end(vl);
