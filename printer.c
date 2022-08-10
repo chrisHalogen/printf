@@ -111,7 +111,7 @@ char *_itoa(int i, char *strout, int base)
  * @str: the string format
  * Return: the number of characters printed
  */
-int _printf(char *str, ...)
+int _printf(const char *format, ...)
 {
 	va_list vl;
 	int i = 0, j = 0;
@@ -120,14 +120,14 @@ int _printf(char *str, ...)
 	char buff[1000] = {0}, tmp[20];
 	char *str_arg;
 
-	va_start(vl, str);
+	va_start(vl, format);
 
-	while (str && str[i])
+	while (format && format[i])
 	{
-		if (str[i] == '%')
+		if (format[i] == '%')
 		{
 			i++;
-			switch (str[i])
+			switch (format[i])
 			{
 				case 'c':
 					buff[j] = (char)va_arg(vl, int);
@@ -158,7 +158,7 @@ int _printf(char *str, ...)
 					break;
 				default:
 					final[0] = '%';
-					final[1] = str[i];
+					final[1] = format[i];
 					_strncpy(&buff[j], final);
 					j += _strlen(final);
 					break;
@@ -166,7 +166,7 @@ int _printf(char *str, ...)
 		}
 		else
 		{
-			buff[j] = str[i];
+			buff[j] = format[i];
 			j++;
 		}
 		i++;
