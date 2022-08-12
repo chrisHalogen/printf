@@ -33,11 +33,11 @@ int output_decimal(int number)
  * Return: the result of the base raised to a
  */
 
-long long int power(int base, int a)
+long int power(int base, int a)
 {
 	int result = 1;
 
-	for (a; a > 0; a--)
+	for (; a > 0; a--)
 	{
 		result *= base;
 	}
@@ -52,7 +52,7 @@ long long int power(int base, int a)
  * Return: the base 10 equivalent of the number
  */
 
-long long number_to_base_10(int number, int base)
+long number_to_base_10(int number, int base)
 {
 	int result = 0, i = 0;
 
@@ -87,7 +87,7 @@ int output_binary(int number)
 
 	binary_buffer[i] = number;
 
-	for (i; i >= 0; i--)
+	for (; i >= 0; i--)
 	{
 		count += _putchar(binary_buffer[i] + '0');
 	}
