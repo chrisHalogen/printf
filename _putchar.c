@@ -1,11 +1,11 @@
 #include <unistd.h>
 
 /**
- * _putchar - writes the character c to the console
- * c - The character to output
- *
- * Return: On success 1 and -1 on error.
+ * _putchar - function to write to the standard output
+ * @c: the character to write to the standard output
+ * Return: number of characters writteen to standard output
  */
+
 int _putchar(char c)
 {
 	return (write(1, &c, 1));
