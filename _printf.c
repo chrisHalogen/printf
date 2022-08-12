@@ -14,6 +14,8 @@ int _printf(const char *format, ...)
 	va_list input_data;
 
 	va_start(input_data, format);
+	if (!format)
+		return (-1);
 	for (i = 0; format[i] != '\0';)
 	{
 		if (format[i] != '%')
@@ -35,15 +37,17 @@ int _printf(const char *format, ...)
 					char_count += _putchar('%');
 					break;
 				case 'd':
-					char_count += output_decimal(va_arg(input_data, int));
-					break;
 				case 'i':
 					char_count += output_decimal(va_arg(input_data, int));
 					break;
 				case 'u':
 					char_count += output_unsigned_int(va_arg(input_data, unsigned int));
 					break;
+				case '\0':
+					return (-1);
 				default:
+					char_count += _putchar('%');
+					char_count += _putchar(format[i + 1]);
 					break;
 			}
 			i += 2;
