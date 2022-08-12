@@ -11,6 +11,7 @@
 int _printf(const char *format, ...)
 {
 	int char_count = 0, i;
+	char s;
 	va_list input_data;
 
 	va_start(input_data, format);
@@ -26,7 +27,6 @@ int _printf(const char *format, ...)
 		else if (format[i] == '%' && format[i + 1] != ' ')
 		{
 			/* The switch ststement is more appropriate but I'll be violating betty's */
-			/* 40 lines per function rule */
 			s = format[i + 1];
 			if (s == 'c')
 				char_count += _putchar(va_arg(input_data, int));
