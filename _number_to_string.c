@@ -9,19 +9,20 @@
 int output_decimal(int number)
 {
 	int count = 0;
+	long int number_input = number;
 
-	if (number < 0)
+	if (number_input < 0)
 	{
 		count += _putchar('-');
-		number *= -1;
+		number_input *= (-1);
 	}
 
-	if (number / 10)
+	if (number_input / 10)
 	{
-		count += output_decimal(number / 10);
+		count += output_decimal(number_input / 10);
 	}
 
-	count += _putchar((number % 10) + '0');
+	count += _putchar((number_input % 10) + '0');
 
 	return (count);
 }

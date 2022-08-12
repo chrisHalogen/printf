@@ -25,30 +25,26 @@ int _printf(const char *format, ...)
 		}
 		else if (format[i] == '%' && format[i + 1] != ' ')
 		{
-			switch (format[i + 1])
+			/* The switch ststement is more appropriate but I'll be violating betty's */
+			/* 40 lines per function rule */
+			s = format[i + 1];
+			if (s == 'c')
+				char_count += _putchar(va_arg(input_data, int));
+			if (s == 's')
+				char_count += output_string(va_arg(input_data, char *));
+			if (s == '%')
+				char_count += _putchar('%');
+			if (s == 'd' || s == 'i')
+				char_count += output_decimal(va_arg(input_data, int));
+			if (s == 'u')
+				char_count += output_unsigned_int(va_arg(input_data, unsigned int));
+			if (s == '\0')
+				return (-1);
+			if (s != 'c' && s != 's' && s != '%' && s != 'd'
+					&& s != 'i' && s != 'u' && s != '\0')
 			{
-				case 'c':
-					char_count += _putchar(va_arg(input_data, int));
-					break;
-				case 's':
-					char_count += output_string(va_arg(input_data, char *));
-					break;
-				case '%':
-					char_count += _putchar('%');
-					break;
-				case 'd':
-				case 'i':
-					char_count += output_decimal(va_arg(input_data, int));
-					break;
-				case 'u':
-					char_count += output_unsigned_int(va_arg(input_data, unsigned int));
-					break;
-				case '\0':
-					return (-1);
-				default:
-					char_count += _putchar('%');
-					char_count += _putchar(format[i + 1]);
-					break;
+				char_count += _putchar('%');
+				char_count += _putchar(format[i + 1]);
 			}
 			i += 2;
 		}
